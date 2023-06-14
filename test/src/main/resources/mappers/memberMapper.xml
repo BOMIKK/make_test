@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.example.mapper.memberMapper">
+ 
+ <!-- 
+        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
+        
+        <select id="selectMember" resultType="com.example.dto.MemberVO" >
+            SELECT ID, PW ,NAME FROM TEST
+        </select>
+        
+        이렇게 해야 한다.
+    -->
+    
+    <select id="getList" resultType="memberVO">
+		SELECT ID, PW ,NAME FROM TEST WHERE ID=2424
+    </select>
+    
+    <select id="selectMember" resultType="memberVO">
+        SELECT ID, PW ,NAME FROM TEST
+    </select>
+    
+    <select id="search" resultType="memberVO">
+  		SELECT ID,PW,NAME FROM TEST
+  		WHERE name LIKE CONCAT('%', #{searchText}, '%')
+	</select>
+    
+    <insert id="insertMember">
+        INSERT into TEST (id,pw,name)
+        values (#{id},#{pw},#{name})
+    </insert>
+    
+    
+    <select id="selectOne" resultType="memberVO">
+        SELECT ID, PW ,NAME FROM TEST where id=#{id}
+    </select>
+    
+    <update id="updateMember">
+        UPDATE TEST set pw=#{pw}, name=#{name} where id=#{id}
+    </update>
+    
+    <delete id="deleteMember">
+    	delete FROM TEST WHERE id=#{id}
+    </delete>
+    
+    <select id="selectMemCode" parameterType="com.example.dto.MemInfoVO" resultType="com.example.dto.MemInfoVO">
+    	select ID,name,num,code from meminfo
+    	 
+    	<if test="mcode !=null">
+    		WHERE code IN
+	    	<foreach collection="mcode" item="item" open="(" close=")" separator=",">
+	      		<if test="item != '00'">
+			        #{item}
+			    </if>
+	    	</foreach>
+    	</if>
+    </select>
+    
+</mapper>
