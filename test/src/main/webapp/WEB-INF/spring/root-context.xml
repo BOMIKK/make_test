@@ -24,7 +24,7 @@
             value="jdbc:mysql://127.0.0.1:3306/documents?useSSL=false&amp;serverTimezone=UTC">
         </property> -->
         <property name="username" value="root"></property>
-        <property name="password" value="****"></property>
+        <property name="password" value="rlaqh190"></property>
     </bean>    
  
     <!-- mybatis SqlSessionFactoryBean -->
